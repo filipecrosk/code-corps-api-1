@@ -10,8 +10,6 @@ defmodule CodeCorps.FilterHelpers do
     query |> limit(^count)
   end
 
-  def newest_first_filter(query), do: query |> order_by([desc: :inserted_at])
-
   def number_as_id_filter(query, number) do
     query |> where([object], object.number == ^number)
   end
@@ -20,26 +18,26 @@ defmodule CodeCorps.FilterHelpers do
     query |> where([object], object.organization_id == ^organization_id)
   end
 
-  def task_type_filter(query, task_type_list) do
-    task_types = task_type_list |> coalesce_string
-    query |> where([object], object.task_type in ^task_types)
+  def project_filter(query, project_id) do
+    query |> where([object], object.project_id == ^project_id)
   end
 
-  def task_status_filter(query, status) do
-    query |> where([object], object.status == ^status)
+  def role_filter(query, roles_list) do
+    roles = roles_list |> coalesce_string
+    query |> where([object], object.role in ^roles)
   end
 
   def task_filter(query, task_id) do
     query |> where([object], object.task_id == ^task_id)
   end
 
-  def project_filter(query, project_id) do
-    query |> where([object], object.project_id == ^project_id)
+  def task_status_filter(query, status) do
+    query |> where([object], object.status == ^status)
   end
 
-  def role_filter(query, roles) do
-    roles = roles |> coalesce_string
-    query |> where([object], object.role in ^roles)
+  def task_type_filter(query, task_type_list) do
+    task_types = task_type_list |> coalesce_string
+    query |> where([object], object.task_type in ^task_types)
   end
 
   def title_filter(query, title) do

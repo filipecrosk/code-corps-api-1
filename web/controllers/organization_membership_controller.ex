@@ -6,10 +6,25 @@ defmodule CodeCorps.OrganizationMembershipController do
 
   alias CodeCorps.OrganizationMembership
 
+  import CodeCorps.FilterHelpers, only: [id_filter: 2, organization_filter: 2, role_filter: 2]
+
   plug :load_resource, model: OrganizationMembership, only: [:show], preload: [:organization, :member]
   plug :load_and_authorize_resource, model: OrganizationMembership, only: [:delete]
   plug :load_and_authorize_changeset, model: OrganizationMembership, only: [:create, :update], preload: [:organization, :member]
   plug JaResource, except: [:create, :update]
+
+  def filter(_conn, query, "id", id_list) do
+    query |> id_filter(id_list)
+  end
+
+  def filter(_conn, query, "role", roles_list) do
+    query |> role_filter(roles_list)
+  end
+
+  def handle_index(_conn, %{"organization_id" => organization_id}) do
+    OrganizationMembership |> organization_filter(organization_id)
+  end
+  def handle_index(_conn, _params), do: OrganizationMembership
 
   def create(conn, %{"data" => %{"type" => "organization-membership"}}) do
     case Repo.insert(conn.assigns.changeset) do

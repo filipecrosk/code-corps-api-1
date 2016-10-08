@@ -66,7 +66,7 @@ defmodule CodeCorps.OrganizationMembershipControllerTest do
       [membership_1, membership_2] = insert_pair(:organization_membership, role: "admin")
       insert(:organization_membership, role: "owner")
 
-      params = %{"role" => "admin"}
+      params = %{"filter" => %{"role" => "admin"}}
       response =
         conn
         |> get(organization_membership_path(conn, :index, params))
@@ -79,7 +79,7 @@ defmodule CodeCorps.OrganizationMembershipControllerTest do
       [membership_1, _] = insert_pair(:organization_membership, role: "admin")
       insert(:organization_membership, role: "owner")
 
-      params = %{"role" => "admin", "filter" => %{"id" => "#{membership_1.id}"}}
+      params = %{"filter" => %{"id" => "#{membership_1.id}", "role" => "admin"}}
       path = conn |> organization_membership_path(:index, params)
       response = conn |> get(path) |> json_response(200)
 
@@ -91,7 +91,7 @@ defmodule CodeCorps.OrganizationMembershipControllerTest do
       [membership_1, _] = insert_pair(:organization_membership, organization: organization, role: "admin")
       insert(:organization_membership, role: "owner")
 
-      params = %{"role" => "admin", "filter" => %{"id" => "#{membership_1.id}"}}
+      params = %{"filter" => %{"id" => "#{membership_1.id}", "role" => "admin"}}
       path = conn |> organization_organization_membership_path(:index, organization)
       response = conn |> get(path, params) |> json_response(200)
 

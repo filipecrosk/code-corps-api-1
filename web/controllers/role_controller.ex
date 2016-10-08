@@ -3,7 +3,6 @@ defmodule CodeCorps.RoleController do
   use JaResource
 
   alias CodeCorps.Role
-  alias JaSerializer.Params
 
   plug :load_and_authorize_resource, model: Role, only: [:create]
   plug JaResource

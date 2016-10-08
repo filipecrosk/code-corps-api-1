@@ -28,7 +28,7 @@ defmodule CodeCorps.Category do
   end
 
   @doc """
-  Builds a changeset for creating an organization.
+  Builds a changeset for creating an category.
   """
   def create_changeset(struct, params) do
     struct

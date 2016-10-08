@@ -2,21 +2,19 @@ defmodule CodeCorps.UserSkillController do
   @analytics Application.get_env(:code_corps, :analytics)
 
   use CodeCorps.Web, :controller
+  use JaResource
+
+  import CodeCorps.FilterHelpers, only: [id_filter: 2]
 
   alias CodeCorps.UserSkill
 
   plug :load_resource, model: UserSkill, only: [:show], preload: [:user, :skill]
   plug :load_and_authorize_changeset, model: UserSkill, only: [:create]
   plug :load_and_authorize_resource, model: UserSkill, only: [:delete]
-  plug :scrub_params, "data" when action in [:create]
+  plug JaResource, except: [:create]
 
-  def index(conn, params) do
-    user_skills =
-      UserSkill
-      |> UserSkill.index_filters(params)
-      |> Repo.all
-
-    render(conn, "index.json-api", data: user_skills)
+  def filter(_conn, query, "id", id_list) do
+    query |> id_filter(id_list)
   end
 
   def create(conn, %{"data" => %{"type" => "user-skill"}}) do
@@ -32,17 +30,5 @@ defmodule CodeCorps.UserSkillController do
         |> put_status(:unprocessable_entity)
         |> render(CodeCorps.ChangesetView, "error.json-api", changeset: changeset)
     end
-  end
-
-  def show(conn, %{"id" => _id}) do
-    render(conn, "show.json-api", data: conn.assigns.user_skill)
-  end
-
-  def delete(conn, %{"id" => _id}) do
-    conn.assigns.user_skill |> Repo.delete!
-
-    conn
-    |> @analytics.track(:removed, conn.assigns.user_skill)
-    |> send_resp(:no_content, "")
   end
 end

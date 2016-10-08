@@ -3,8 +3,6 @@ defmodule CodeCorps.Comment do
 
   alias CodeCorps.MarkdownRenderer
 
-  import CodeCorps.ModelHelpers
-
   schema "comments" do
     field :body, :string
     field :markdown, :string
@@ -32,9 +30,5 @@ defmodule CodeCorps.Comment do
     |> validate_required([:task_id, :user_id])
     |> assoc_constraint(:task)
     |> assoc_constraint(:user)
-  end
-
-  def index_filters(query, params) do
-    query |> task_filter(params)
   end
 end

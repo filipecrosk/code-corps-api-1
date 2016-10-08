@@ -5,8 +5,6 @@ defmodule CodeCorps.OrganizationMembership do
 
   use CodeCorps.Web, :model
 
-  import CodeCorps.ModelHelpers
-
   schema "organization_memberships" do
     field :role, :string
 

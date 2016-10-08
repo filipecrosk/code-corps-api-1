@@ -72,6 +72,9 @@ config :sentry,
   included_environments: ~w(prod staging)a,
   use_error_logger: true
 
+config :ja_resource,
+  repo: CodeCorps.Repo
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

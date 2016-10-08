@@ -4,14 +4,13 @@ defmodule CodeCorps.OrganizationController do
 
   alias CodeCorps.Organization
 
-  import CodeCorps.ControllerHelpers, only: [coalesce_id_string: 1]
+  import CodeCorps.FilterHelpers, only: [id_filter: 2]
 
   plug :load_and_authorize_resource, model: Organization, only: [:create, :update]
   plug JaResource
 
   def filter(_conn, query, "id", id_list) do
-    ids = id_list |> coalesce_id_string
-    query |> where([object], object.id in ^ids)
+    query |> id_filter(id_list)
   end
 
   def handle_create(_conn, attributes) do

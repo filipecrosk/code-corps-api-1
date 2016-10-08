@@ -105,15 +105,14 @@ defmodule CodeCorps.OrganizationMembershipControllerTest do
 
       path = conn |> organization_membership_path(:show, membership)
 
-      response =
-        conn
-        |> get(path)
-        |> json_response(200)
-        |> assert_jsonapi_relationship("organization", membership.organization.id)
-        |> assert_jsonapi_relationship("member", membership.member.id)
-        |> Map.get("data")
-        |> assert_result_id(membership.id)
-        |> assert_role("admin")
+      conn
+      |> get(path)
+      |> json_response(200)
+      |> assert_jsonapi_relationship("organization", membership.organization.id)
+      |> assert_jsonapi_relationship("member", membership.member.id)
+      |> Map.get("data")
+      |> assert_result_id(membership.id)
+      |> assert_role("admin")
     end
 
     test "renders page not found when id is nonexistent", %{conn: conn} do

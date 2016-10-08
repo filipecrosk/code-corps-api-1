@@ -39,13 +39,6 @@ defmodule CodeCorps.OrganizationMembership do
     |> validate_inclusion(:role, roles)
   end
 
-  def index_filters(query, params) do
-    query
-    |> id_filter(params)
-    |> organization_filter(params)
-    |> role_filter(params)
-  end
-
   defp roles do
     ~w{ pending contributor admin owner }
   end

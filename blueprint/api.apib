@@ -720,11 +720,13 @@ This endpoint retrieves skills that can be applied to both users (through user-s
 
 Skills can be filtered by the id of the skill. This should be an array of one or multiple ids.
 
-### Filter by id [GET /skills{?filter}]
+### Filter by id [GET /skills{?filter[id]}]
 
 + Parameters
 
-    + filter: `1` (enum[number], optional) - Id query to filter returned skills
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -813,7 +815,7 @@ Slugged routes allow us to make API requests for a user or an organization witho
 
 ### Find a Slugged Route [GET]
 
-This endpoint will return one of two possible responses, depending on if the slugged route's owner is a user or an organization. If the slugged route is owned by a user, the responses's owner relationship will point to a user and include a user resource. If it's owned by an organization, it will point to and include an organization resource.
+This endpoint will return one of two possible responses, depending on if the slugged route's owner is a user or an organization. If the slugged route is owned by a user, the responses's owner relationship will have a user relationship and a nil organization relationship. If it's owned by an organization, it will have an organization relationship and a nil user relationship.
 
 + Request
 
@@ -1691,14 +1693,18 @@ This resource identifies a relationship between a User and a Skill. For example,
 + data(Role Skill Resource)
 + include JSON API Version
 
+## Skill Attributes (object)
++ description: `Elixir is a functional, concurrent, general-purpose programming language that runs on the Erlang virtual machine (BEAM).`
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
++ title: `Elixir`
++ `updated-at`: `2016-07-08T03:03:51.967Z` (string)
+
 ## Skill Resource (object)
 + include Skill Resource Identifier
-+ attributes
-    + title: `Elixir`
-    + description: `Elixir is a functional, concurrent, general-purpose programming language that runs on the Erlang virtual machine (BEAM).`
++ attributes(Skill Attributes)
 + relationships
-    + roles
-        + data(array[Role Resource Identifier])
+    + `role-skills`
+        + data(array[Role Skill Resource Identifier])
 
 ## Skill Response (object)
 + data(Skill Resource)
@@ -1711,8 +1717,12 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Slugged Route User Resource (object)
 + include Slugged Route Resource Identifier
 + attributes
-    + slug: `example-slug`
+    + `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
+    + slug: `joshsmith`
+    + `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 + relationships
+    + organization
+        + data: nil
     + user
         + data(User Resource Identifier)
 
@@ -1720,11 +1730,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 + include Slugged Route Resource Identifier
 + attributes
     + `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
-    + slug: `example-slug`
+    + slug: `code-corps`
     + `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 + relationships
     + organization
         + data(Organization Resource Identifier)
+    + user
+        + data: nil
 
 ## Slugged Route Resource Identifier (object)
 + id: `1` (string, required)
@@ -1736,7 +1748,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Slugged Route Organization Response (object)
 + data(Slugged Route Organization Resource)
-+ included(array[Organization Resource])
++ include JSON API Version
 
 ## Task Attributes (object)
 + body: `<p>A <b>strong</b> body.</p>` (string)

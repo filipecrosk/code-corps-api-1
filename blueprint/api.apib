@@ -19,7 +19,7 @@ The remote development API can be found at `http://api.pbqrpbecf-qri.org`.
 
 When using the API's authenticated endpoints you can authenticate users by exchanging the `username` (email address) and `password` for an OAuth token.
 
-## JSON Web Token Exchange [/oauth/token]
+## JSON Web Token Exchange [/token]
 
 Exchange email and password for `token`.
 
@@ -36,7 +36,7 @@ Exchange email and password for `token`.
 
             Content-Type: application/json
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Attributes (JSON Web Token Valid Response)
 
@@ -47,6 +47,28 @@ Exchange email and password for `token`.
 + Response 401 (application/json)
 
     + Attributes (JSON Web Token Invalid Password Response)
+
+## JSON Web Token Refresh [/token/refresh]
+
+### Refresh the token [POST]
+
++ Parameters
+
+    + token: `eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEiLCJleHAiOjE0NzY3NTQ2MTcsImlhdCI6MTQ3NDE2MjYxNywiaXNzIjoiQ29kZUNvcnBzIiwianRpIjoiMDY2ODQ0OWYtNWY5OC00ODVkLWI4NTktNjRhZDhmZDU3NWQ4IiwicGVtIjp7fSwic3ViIjoiVXNlcjoxIiwidHlwIjoidG9rZW4ifQ.Y80alu1UEmk4uxGgA7ORVdS8ikuUJFxCozyK6S9UeaLW392Vhti4d1Y1IXivWA_j9TKjADhqTQnMihbCzUiLsA` (string, required) - The JSON Web Token provided in the create step.
+
++ Request
+
+    + Headers
+
+            Content-Type: application/json
+
++ Response 201 (application/json)
+
+    + Attributes (JSON Web Token Valid Response)
+
++ Response 401 (application/json)
+
+    + Attributes (JSON Web Token Expired Response)
 
 # Group Categories
 
@@ -93,7 +115,6 @@ Exchange email and password for `token`.
             Accept: application/json
             Authorization: Bearer {token}
 
-
 + Response 200 (application/json)
 
     + Attributes (Category Response)
@@ -119,10 +140,6 @@ Exchange email and password for `token`.
 + Response 404 (application/json)
 
     + Attributes (Record Not Found Response)
-
-+ Response 409 (application/json)
-
-    + Attributes (Creation Conflict Response)
 
 # Group Comments
 
@@ -435,92 +452,6 @@ Write privileges are for admin users only, read can be accessable by any user.
 + Response 422 (application/json)
 
     + Attributes (Unprocessable Entity Response)
-
-# Group Tasks
-
-## Tasks [/tasks]
-
-### Create a task [POST]
-
-+ Request
-
-    + Headers
-
-            Accept: application/json
-            Authorization: Bearer {token}
-
-+ Response 201 (application/json)
-
-    + Attributes (Task Response)
-
-+ Response 422 (application/json)
-
-    + Attributes (Unprocessable Entity Response)
-
-### List all tasks [GET]
-
-+ Request
-
-    + Headers
-
-            Accept: application/json
-            Authorization: Bearer {token}
-
-+ Response 200 (application/json)
-
-    + Attributes (Tasks Response)
-
-## Task [/tasks/{id}]
-
-### Retrieve a task [GET /tasks/{id}]
-
-+ Parameters
-
-    + id (number) - Id of a task.
-
-+ Request
-
-    + Headers
-
-            Accept: application/json
-            Authorization: Bearer {token}
-
-+ Response 200 (application/json)
-
-    + Attributes (Task Response)
-
-+ Response 404 (application/json)
-
-    + Attributes (Record Not Found Response)
-
-### Update a task [PATCH /tasks/{id}]
-
-+ Parameters
-
-    + id (number) - Id of a task.
-
-+ Request
-
-    + Headers
-
-            Accept: application/json
-            Authorization: Bearer {token}
-
-+ Response 201 (application/json)
-
-    + Attributes (Task Response)
-
-+ Response 204 (application/json)
-
-    + Attributes (No Content Response)
-
-+ Response 404 (application/json)
-
-    + Attributes (Record Not Found Response)
-
-+ Response 409 (application/json)
-
-    + Attributes (Creation Conflict Response)
 
 # Group Previews
 
@@ -882,6 +813,88 @@ This endpoint will return one of two possible responses, depending on if the slu
 + Response 200 (application/json)
 
     + Attributes (Slugged Route Organization Response)
+
+# Group Tasks
+
+## Tasks [/tasks]
+
+### Create a task [POST]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+            Authorization: Bearer {token}
+
++ Response 201 (application/json)
+
+    + Attributes (Task Response)
+
++ Response 422 (application/json)
+
+    + Attributes (Unprocessable Entity Response)
+
+### List all tasks [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+            Authorization: Bearer {token}
+
++ Response 200 (application/json)
+
+    + Attributes (Tasks Response)
+
+## Task [/tasks/{id}]
+
+### Retrieve a task [GET /tasks/{id}]
+
++ Parameters
+
+    + id (number) - Id of a task.
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+            Authorization: Bearer {token}
+
++ Response 200 (application/json)
+
+    + Attributes (Task Response)
+
++ Response 404 (application/json)
+
+    + Attributes (Record Not Found Response)
+
+### Update a task [PATCH /tasks/{id}]
+
++ Parameters
+
+    + id (number) - Id of a task.
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+            Authorization: Bearer {token}
+
++ Response 201 (application/json)
+
+    + Attributes (Task Response)
+
++ Response 204 (application/json)
+
+    + Attributes (No Content Response)
+
++ Response 404 (application/json)
+
+    + Attributes (Record Not Found Response)
 
 # Group User Categories
 
@@ -1322,7 +1335,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 # Data Structures
 
-## Category (object)
+## Category Attributes (object)
 + name: `Category` (required, string)
 + slug: `cat1` (required, string)
 + description: `This is the category description` (string)
@@ -1343,40 +1356,39 @@ This resource identifies a relationship between a User and a Skill. For example,
 + id: `1` (string)
 + type: `category`
 
+## Category Resource (object)
++ include Category Resource Identifier
++ attributes(Category Attributes)
++ relationships
+    + `project-categories`
+        + data(array[Project Category Resource Identifier])
+
 ## Category Response (object)
-+ data
-  + id: `1` (string)
-  + type: `category` (string)
-  + attributes(Category, required)
-  + relationships(Category Relationships Base, required)
++ data(Category Resource)
++ include JSON API Version
 
 ## Categories Response (object)
-+ categories
-  + data(array[Category], required)
++ data(array[Category Resource])
++ include JSON API Version
 
 ## Comment Resource (object)
 + include Comment Resource Identifier
 + attributes(Comment Attributes)
 + relationships
-    + tasks
+    + task
         + data(Task Resource Identifier)
-        + links (object)
-    + users
+    + user
         + data(User Resource Identifier)
-        + links (object)
-    + comment-user-mentions
-        + data(array[Comment User Mention Resource Identifier])
-        + links (object)
 
 ## Comment Attributes (object)
-+ markdown: `Markdown formatted string` (string)
 + body: `Html string rendered from markdown` (string)
++ `inserted-at`: `2014-07-07T18:01:26.000Z` (string)
++ markdown: `Markdown formatted string` (string)
 + state: (enum[string])
     + Members
         + `published`
         + `edited`
-+ edited_at: `2014-07-07T18:01:26.000Z` (string)
-+ inserted_at: `2014-07-07T18:01:26.000Z` (string)
++ `updated-at`: `2014-07-07T18:01:26.000Z` (string)
 
 ## Comment Resource Identifier (object)
 + id: `1` (string)
@@ -1398,59 +1410,16 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Comment Response (object)
 + data
     + include Comment Resource
-+ included(array[Comment User Mention Resource])
++ include JSON API Version
 
 ## Comments Response (object)
 + comments
     + data(array[Comment Response], required)
-+ included(array[Comment User Mention Resource])
-
-## Comment User Mention Resource (object)
-+ include Comment User Mention Resource Identifier
-+ attributes
-    + include Comment User Mention Attributes
-+ relationships
-    + users
-        + data(User Resource Identifier)
-        + links (object)
-    + comments
-        + data(Comment Resource Identifier)
-        + links (object)
-
-## Comment User Mention Attributes (object)
-+ indices: 1, 2 (array[number])
-    The start and the end index of where the mention is to be placed within the comment body
-+ username: 'Username of related user' (string)
++ include JSON API Version
 
 ## Comment Relationship (object)
 + id: 1 (string)
 + type: `comment` (string)
-
-## Comment User Mention Relationships (object)
-+ user
-    + data (User Relationship)
-+ comment
-    + data (Comment Relationship)
-
-## Comment User Mention Resource Identifier
-+ id: `1` (string)
-+ type: `comment-user-mention` (string)
-
-## Comment User Mention Response (object)
-+ data (object)
-    + Include (Comment User Mention Resource)
-    + relationships
-        + Include (Comment User Mention Relationships)
-
-## Comment User Mentions Response (object)
-+ data(array[Comment User Mention Response])
-
-## Creation Conflict Response (object)
-+ title: `Conflict` (string)
-
-+ detail: `{Object} with 'id'={id} already created` (string) - Details of what record was already there.
-
-+ status: 409 (number) - HTTP status code
 
 ## Filter Missing Response (object)
 + errors (array)
@@ -1479,6 +1448,18 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## No Content Response (object)
 
     {}
+
+## JSON API Version
++ jsonapi
+  + version: `1.0` (string)
+
+## JSON Web Token Expired Response (object)
++ errors (array)
+    + Attributes
+        + id: `UNAUTHORIZED` (string, required)
+        + title: `401 Unauthorized` (string, required)
+        + detail: `token_expired` (string, required)
+        + status: 401 (number, required)
 
 ## JSON Web Token Invalid Response (object)
 + errors (array)
@@ -1514,9 +1495,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Organization Response (object)
 + data(Organization Resource)
++ include JSON API Version
 
 ## Organizations Response (object)
 + data(array[Organization Resource])
++ include JSON API Version
 
 ## Organization Resource (object)
 + include Organization Resource Identifier
@@ -1529,13 +1512,10 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + members
         + data(array[Member Resource Identifier])
-        + links
     + projects
         + data(array[Project Resource Identifier])
-        + links
     + organization-memberships
         + data(array[Organization Membership Resource Identifier])
-        + links
 
 ## Organization Membership Resource (object)
 + include Organization Membership Resource Identifier
@@ -1543,10 +1523,8 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + members (object)
         + data(User Resource Identifier)
-        + links (object)
     + organizations
         + data(Organization Resource Identifier)
-        + links (object)
 
 ## Organization Membership Attributes (object)
 + role: (enum[string])
@@ -1562,9 +1540,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Organization Membership Response (object)
 + data(Organization Membership Resource)
++ include JSON API Version
 
 ## Organization Memberships Response (object)
 + data(array[Organization Membership Resource])
++ include JSON API Version
 
 ## Organization Membership Create Request (object)
 + type: `organization-membership` (string)
@@ -1572,30 +1552,12 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + members
         + data(User Recource Identifier)
-        + links (object)
     + organizations
         + data(Organization Resource Identifier)
-        + links (object)
 
 ## Organization Membership Update Request (object)
 + include Organization Membership Resource Identifier
 + attributes(Organization Membership Attributes)
-
-## Task Resource Identifier
-+ id: `1` (string)
-+ type: `task` (string)
-
-## Task Response (object)
-+ id: 1 (string)
-+ status: `open` (string)
-+ task_type: `task` (string)
-+ title: `This is the title of a task` (string)
-+ body: `This is the body of of a task filled with lots of awesome details` (string)
-+ user_id: 1 (string)
-
-## Tasks Response (object)
-+ tasks
-    + data(array[Task Response], required)
 
 ## Preview (object)
 + body: `<p>A <strong>strong</strong> preview</p>` (string)
@@ -1609,6 +1571,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Preview Response (object)
 + data(Preview Response Base)
++ include JSON API Version
 
 ## Previews Relationship (object)
 + id: 1 (string)
@@ -1634,6 +1597,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Project Category Response (object)
 + data(Project Category Resource)
++ include JSON API Version
 
 ## Project Resource (object)
 + include Project Resource Identifier
@@ -1691,9 +1655,8 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Record Not Found Response (object)
 + errors (array)
     + Attributes
-        + id: `RECORD_NOT_FOUND` (string)
-        + title: `Record not found` (string)
-        + detail: `Couldn't find {object} with 'id'={id}` (string) - Details of what record was not found.
+        + id: `NOT_FOUND` (string)
+        + title: `404 Resource not found` (string)
         + status: 404 (number) - HTTP status code
 
 ## Role Resource Identifier
@@ -1702,9 +1665,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Role Response (object)
 + data(Role Resource)
++ include JSON API Version
 
 ## Roles Response (object)
 + data(array[Role Resource])
++ include JSON API Version
 
 ## Role Resource (object)
 + include Role Resource Identifier
@@ -1719,10 +1684,10 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + skills
         + data(array[Skill Resource Identifier])
-        + links
 
 ## Role Skill Response (object)
 + data(Role Skill Resource)
++ include JSON API Version
 
 ## Role Skill Resource (object)
 + include Role Skill Resource Identifier
@@ -1730,7 +1695,6 @@ This resource identifies a relationship between a User and a Skill. For example,
     + roles
         + data(array[Role Resource Identifier])
         + data(array[Skill Resource Identifier])
-        + links
 
 ## Role Skill Resource Identifier (object)
 + id: `1` (string)
@@ -1748,13 +1712,14 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + roles
         + data(array[Role Resource Identifier])
-        + links
 
 ## Skill Response (object)
 + data(Skill Resource)
++ include JSON API Version
 
 ## Skills Response (object)
 + data(array[Skill Resource])
++ include JSON API Version
 
 ## Slugged Route User Resource (object)
 + include Slugged Route Resource Identifier
@@ -1767,7 +1732,9 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Slugged Route Organization Resource (object)
 + include Slugged Route Resource Identifier
 + attributes
+    + `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
     + slug: `example-slug`
+    + `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 + relationships
     + organization
         + data(Organization Resource Identifier)
@@ -1778,20 +1745,57 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Slugged Route User Response (object)
 + data(Slugged Route User Resource)
-+ included(array[User Resource])
++ include JSON API Version
 
 ## Slugged Route Organization Response (object)
 + data(Slugged Route Organization Resource)
 + included(array[Organization Resource])
 
+## Task Attributes (object)
++ body: `<p>A <b>strong</b> body.</p>` (string)
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
++ markdown: `A **strong** body.` (string)
++ number: 1 (string)
++ status: `open` (string)
++ state: `published` (string)
++ task-type: `task` (string)
++ title: `Example task` (string)
++ `updated-at`: `2016-07-08T03:03:51.967Z` (string)
+
+## Task Resource Identifier
++ id: `1` (string)
++ type: `task` (string)
+
+## Task Resource (object)
++ include Task Resource Identifier
++ attributes(Task Attributes)
++ relationships
+    + comments
+        + data(Comment Resource Identifier)
+    + project (object)
+        + data(Project Resource Identifier)
+    + user (object)
+        + data(User Resource Identifier)
+
+## Task Response (object)
++ data(Task Resource)
++ include JSON API Version
+
+## Tasks Response (object)
++ data(array[Task Response], required)
++ include JSON API Version
+
 ## Unprocessable Entity Response (object)
 + errors (array)
     + Attributes
-        + title: `Unprocessable Entity` (string)
+        + id: `VALIDATION_ERROR` (string)
+        + detail: `can't be blank` (string)
+        + source
+            + pointer: `data/attributes/attribute` - The attribute in question.
         + status: 422 (number) - HTTP status code
 
 ## User Attributes (object)
-+ inserted_at: `2016-07-08T03:03:51.967Z` (string)
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
 + email: `me@testuser.org` (string)
 + first_name: `Test` (string)
 + last_name: `User` (string)
@@ -1812,10 +1816,8 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + categories
         + data(Category Resource Identifier)
-        + links
     + users
         + data(User Resource Identifier)
-        + links
 
 ## User Category Resource Identifier
 + id: `1` (string)
@@ -1823,9 +1825,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Category Response (object)
 + data(User Category Resource)
++ include JSON API Version
 
 ## User Categories Response (object)
 + data(array[User Category Resource])
++ include JSON API Version
 
 ## User Relationships (object)
 + organization-memberships (object)
@@ -1841,9 +1845,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Response (object)
 + data (User Resource)
++ include JSON API Version
 
 ## Users Response (object)
 + data(array[User Resource])
++ include JSON API Version
 
 ## User Resource (object)
 + Include User Resource Identifier
@@ -1868,19 +1874,19 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Role Response (object)
 + data(User Role Resource)
++ include JSON API Version
 
 ## User Roles Response (object)
 + data(array[User Role Resource])
++ include JSON API Version
 
 ## User Role Resource (object)
 + include User Role Resource Identifier
 + relationships
     + role
         + data(Role Resource Identifier)
-        + links
     + user
         + data(User Resource Identifier)
-        + links
 
 ## User Skill Resource Identifier (object)
 + id: `1` (string)
@@ -1888,16 +1894,16 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Skill Response (object)
 + data(User Skill Resource)
++ include JSON API Version
 
 ## User Skills Response (object)
 + data(array[User Skill Resource])
++ include JSON API Version
 
 ## User Skill Resource (object)
 + include User Skill Resource Identifier
 + relationships
     + skill
         + data(Skill Resource Identifier)
-        + links
     + user
         + data(User Resource Identifier)
-        + links

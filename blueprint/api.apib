@@ -919,11 +919,13 @@ It may help to think of a User Category as an interest. A user may have interest
 
 ## User Categories [/user-categories]
 
-### Filter user categories by id [GET]
+### Filter user categories by id [GET /user-categories{?filter[id]}}]
 
 + Parameters
 
-    + filter: `1,2` (string, required) - Comma separated string of `id`s to filter by.
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -1813,9 +1815,9 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## User Category Resource (object)
 + include User Category Resource Identifier
 + relationships
-    + categories
+    + category
         + data(Category Resource Identifier)
-    + users
+    + user
         + data(User Resource Identifier)
 
 ## User Category Resource Identifier

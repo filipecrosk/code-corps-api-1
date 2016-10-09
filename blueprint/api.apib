@@ -1799,23 +1799,6 @@ This resource identifies a relationship between a User and a Skill. For example,
             + pointer: `data/attributes/attribute` - The attribute in question.
         + status: 422 (number) - HTTP status code
 
-## User Attributes (object)
-+ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
-+ email: `me@testuser.org` (string)
-+ first_name: `Test` (string)
-+ last_name: `User` (string)
-+ name: `Test User` (string)
-+ username: `testuser` (string)
-+ twitter: `testuser` (string)
-+ biography: `Sample bio.` (string)
-+ website: `https://testuser.org` (string)
-+ facebook_id: `1234567890` (string)
-+ facebook_token: `CAABwiWr8tH8BAGKCYOIgoMwJ9T0ZAmJ6KJJNcUjzmftdAOCx1RgzxZAjzGB1s37DDCEoy9r2VgrCLffCTvEGe9cZBZPAwBhygi2ZpTubZC2eCzMe16CLP4Wlc9bStWGwUNYoLEl4dXu4uJl2CCLiFXEtP4GKDv0Gk4s35iXty77KZBx5NYBCcEUs98WjdJQcXLsb1X2ZBaMTW2AZDZN` (string)
-+ photo_thumb_url: `https://d3pgew4wbk2vb1.cloudfront.net/icons/user_default_thumb.png` (string)
-+ photo_large_url: `https://d3pgew4wbk2vb1.cloudfront.net/icons/user_default_large.png` (string)
-+ state: `signed_up` (string)
-+ theme: `light` (string)
-
 ## User Category Resource (object)
 + include User Category Resource Identifier
 + relationships
@@ -1836,16 +1819,32 @@ This resource identifies a relationship between a User and a Skill. For example,
 + data(array[User Category Resource])
 + include JSON API Version
 
+## User Attributes (object)
++ biography: `Sample bio.` (string)
++ email: `me@testuser.org` (string)
++ `first-name`: `Test` (string)
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
++ `last-name`: `User` (string)
++ name: `Test User` (string)
++ `photo-large-url`: `https://d3pgew4wbk2vb1.cloudfront.net/icons/user_default_large.png` (string)
++ `photo-thumb-url`: `https://d3pgew4wbk2vb1.cloudfront.net/icons/user_default_thumb.png` (string)
++ state: `signed_up` (string)
++ `state-transition`: `edit_profile` (string)
++ theme: `light` (string)
++ twitter: `testuser` (string)
++ username: `testuser` (string)
++ website: `https://testuser.org` (string)
+
 ## User Relationships (object)
-+ organization-memberships (object)
++ `organization-memberships` (object)
     + data(array[Organization Membership Resource Identifier])
-+ organizations (object)
-    + data(array[Organization Resource Identifier])
-+ user-categories (object)
++ `slugged-route` (object)
+    + data(Slugged Route Resource Identifier)
++ `user-categories` (object)
     + data(array[User Category Resource Identifier])
-+ user-roles (object)
++ `user-roles` (object)
     + data(array[User Role Resource Identifier])
-+ user-skills (object)
++ `user-skills` (object)
     + data(array[User Skill Resource Identifier])
 
 ## User Response (object)

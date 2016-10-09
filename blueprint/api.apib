@@ -651,7 +651,7 @@ A user is able to have multiple roles through their user roles.
             Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/vnd.api+json; charset=utf-8)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (Role Response)
 
@@ -1641,9 +1641,27 @@ This resource identifies a relationship between a User and a Skill. For example,
         + title: `404 Resource not found` (string)
         + status: 404 (number) - HTTP status code
 
+## Role Attributes
++ ability: `Backend Development` (string)
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
++ kind: `technology` (enum[string])
+    + Members
+        + `technology`
+        + `creative`
+        + `support`
++ name: `Backend Developer` (string)
++ `updated-at`: `2016-07-08T03:03:51.967Z` (string)
+
 ## Role Resource Identifier
 + id: `1` (string, required)
 + type: `role` (string, required)
+
+## Role Resource (object)
++ include Role Resource Identifier
++ attributes(Role Attributes)
++ relationships
+    + `role-skills`
+        + data(array[Role Skill Resource Identifier])
 
 ## Role Response (object)
 + data(Role Resource)
@@ -1652,20 +1670,6 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Roles Response (object)
 + data(array[Role Resource])
 + include JSON API Version
-
-## Role Resource (object)
-+ include Role Resource Identifier
-+ attributes
-    + name: `Backend Developer` (string)
-    + ability: `Backend Development` (string)
-    + kind: `technology` (enum[string])
-        + Members
-            + `technology`
-            + `creative`
-            + `support`
-+ relationships
-    + skills
-        + data(array[Skill Resource Identifier])
 
 ## Role Skill Response (object)
 + data(Role Skill Resource)

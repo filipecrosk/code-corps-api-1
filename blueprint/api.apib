@@ -811,7 +811,7 @@ This resource identifies a relationship between a Role and a Skill. For example,
 
 We can use the many skills grouped under a role to suggest popular skills to users who may have self-identifed as a "Backend Developer".
 
-## Role Skill [/role-skills]
+## Role Skills [/role-skills]
 
 ### Create a role skill [POST]
 
@@ -837,6 +837,65 @@ We can use the many skills grouped under a role to suggest popular skills to use
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
+
+### List all role skills [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Role Skills Response)
+
+## Role Skill [/role-skills/{id}]
+
+### Retrieve a role skill [GET]
+
++ Parameters
+
+    + id (number) - Id of a role skill.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Role Skill Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
+
+### Delete a role skill [DELETE]
+
++ Parameters
+
+    + id (number) - Id of a role skill.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+            Authorization: Bearer {token}
+
++ Response 204 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (No Content Response)
+
++ Response 401 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (JSON Web Token Invalid Response)
+
++ Response 403 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Forbidden Response)
 
 # Group Skills
 
@@ -1840,12 +1899,12 @@ This resource identifies a relationship between a User and a Skill. For example,
 + id: `1` (string, required)
 + type: `role-skill` (string, required)
 
-## Skill Resource Identifier (object)
-+ id: `1` (string, required)
-+ type: `skill` (string, required)
-
 ## Role Skill Response (object)
 + data(Role Skill Resource)
++ include JSON API Version
+
+## Role Skills Response (object)
++ data(array[Role Skill Resource])
 + include JSON API Version
 
 ## Skill Attributes (object)
@@ -1860,6 +1919,10 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships
     + `role-skills`
         + data(array[Role Skill Resource Identifier])
+
+## Skill Resource Identifier (object)
++ id: `1` (string, required)
++ type: `skill` (string, required)
 
 ## Skill Response (object)
 + data(Skill Resource)

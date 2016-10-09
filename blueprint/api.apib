@@ -514,9 +514,45 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
     + Attributes (Unprocessable Entity Response)
 
-## Project Category [/project-categories/:id]
+### List all project categories [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Categories Response)
+
+## Project Category [/project-categories/{id}]
+
+### Retrieve a project category [GET]
+
++ Parameters
+
+    + id (number) - Id of a project category.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Category Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
 
 ### Delete a project category [DELETE]
+
++ Parameters
+
+    + id (number) - Id of a project category.
 
 + Request
 
@@ -1640,6 +1676,10 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Project Category Response (object)
 + data(Project Category Resource)
++ include JSON API Version
+
+## Project Categories Response (object)
++ data(array[Project Category Resource])
 + include JSON API Version
 
 ## Project Skill Resource Identifier (object)

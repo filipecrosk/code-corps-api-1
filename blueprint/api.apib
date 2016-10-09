@@ -1671,16 +1671,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 + data(array[Role Resource])
 + include JSON API Version
 
-## Role Skill Response (object)
-+ data(Role Skill Resource)
-+ include JSON API Version
-
 ## Role Skill Resource (object)
 + include Role Skill Resource Identifier
 + relationships
-    + roles
-        + data(array[Role Resource Identifier])
-        + data(array[Skill Resource Identifier])
+    + role
+        + data(Role Resource Identifier)
+    + skill
+        + data(Skill Resource Identifier)
 
 ## Role Skill Resource Identifier (object)
 + id: `1` (string, required)
@@ -1689,6 +1686,10 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Skill Resource Identifier (object)
 + id: `1` (string, required)
 + type: `skill` (string, required)
+
+## Role Skill Response (object)
++ data(Role Skill Resource)
++ include JSON API Version
 
 ## Skill Resource (object)
 + include Skill Resource Identifier

@@ -34,17 +34,17 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Content-Type: application/json
+            Content-Type: application/vnd.api+json
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Valid Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token No User With Email Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Password Response)
 
@@ -60,13 +60,13 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Content-Type: application/json
+            Content-Type: application/vnd.api+json
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Valid Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Expired Response)
 
@@ -80,14 +80,14 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Category Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -97,10 +97,9 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
-            Authorization: Bearer {token}
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Categories Response)
 
@@ -112,14 +111,13 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
-            Authorization: Bearer {token}
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Category Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -129,15 +127,15 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -151,34 +149,33 @@ Exchange email and password for `token`.
 
     + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
 
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, synthax constraints to not allow us to define it in the documentation this way.
-
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Comments Response)
 
-## List comments for a specified task [GET /tasks/{number}/comments]
+## List comments for a specified task [GET /tasks/{task_id}/comments]
 
 + Parameters
 
-    + number: 1 (number, required) - Task number, uniquely identifying a task
+    + task_id: 1 (number, required) - Task id, uniquely identifying a task
 
 + Request
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Comments Response)
 
@@ -188,16 +185,16 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
     + Attributes (Comment Create Request)
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Comment Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -213,16 +210,16 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
     + Attributes (Comment Update Request)
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Comment Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -241,10 +238,10 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Memberships Response)
 
@@ -256,18 +253,18 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Membership Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
@@ -277,10 +274,10 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Memberships Response)
 
@@ -292,10 +289,10 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Membership Response)
 
@@ -307,18 +304,18 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Membership Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
@@ -328,22 +325,22 @@ Exchange email and password for `token`.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -365,13 +362,13 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organizations Response)
 
-+ Response 400 (application/json)
++ Response 400 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Filter Missing Response)
 
@@ -381,22 +378,22 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -412,13 +409,13 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -428,28 +425,28 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + id (number) - Id of an organization.
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Resource)
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -463,18 +460,18 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Preview Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -490,18 +487,18 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Category Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -513,18 +510,18 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
@@ -540,10 +537,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Projects Response)
 
@@ -553,10 +550,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
 
@@ -566,10 +563,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Projects Response)
 
@@ -579,10 +576,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
 
@@ -594,10 +591,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
 
@@ -611,10 +608,10 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
 
@@ -632,22 +629,22 @@ A user is able to have multiple roles through their user roles.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (Role Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (Unprocessable Entity Response)
 
@@ -657,9 +654,9 @@ A user is able to have multiple roles through their user roles.
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
   + Attributes (Roles Response)
 
@@ -677,22 +674,22 @@ We can use the many skills grouped under a role to suggest popular skills to use
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Role Skill Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -714,9 +711,9 @@ Skills can be filtered by the id of the skill. This should be an array of one or
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Skills Response)
 
@@ -734,9 +731,9 @@ For example, if we wanted to return skills like "Java" and "JavaScript", we may 
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Skills Response)
 
@@ -746,22 +743,22 @@ For example, if we wanted to return skills like "Java" and "JavaScript", we may 
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Skill Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -777,13 +774,13 @@ For example, if we wanted to return skills like "Java" and "JavaScript", we may 
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Skill Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -803,14 +800,14 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Slugged Route User Response)
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Slugged Route Organization Response)
 
@@ -824,14 +821,14 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Task Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -841,10 +838,10 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Tasks Response)
 
@@ -860,14 +857,14 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Task Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -881,18 +878,18 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Task Response)
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -914,9 +911,9 @@ It may help to think of a User Category as an interest. A user may have interest
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Categories Response)
 
@@ -939,18 +936,18 @@ When creating a user category, the authenticated user is assumed by the server s
 
                       + Headers
 
-                              Accept: application/json
+                              Accept: application/vnd.api+json
                               Authorization: Bearer {token}
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Category Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -966,13 +963,13 @@ When creating a user category, the authenticated user is assumed by the server s
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Category Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -982,18 +979,18 @@ When creating a user category, the authenticated user is assumed by the server s
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
@@ -1009,14 +1006,14 @@ This resource identifies a relationship between a User and a Role. For example, 
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Role Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -1032,22 +1029,22 @@ This resource identifies a relationship between a User and a Role. For example, 
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -1067,9 +1064,9 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Skills Response)
 
@@ -1079,18 +1076,18 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Skill Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -1106,9 +1103,9 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Skill Response)
 
@@ -1123,22 +1120,22 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
             Authorization: Bearer <token>
 
-+ Response 204 (application/json)
++ Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -1152,23 +1149,23 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + `filter[id]`: `1,2` (required, string)
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Users Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
 ### Create a user [POST]
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
     + Attributes (object)
 
@@ -1182,11 +1179,11 @@ This resource identifies a relationship between a User and a Skill. For example,
                 + password: `password` (string, required)
                 + username: `testuser` (string, required)
 
-+ Response 201 (application/json)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -1196,7 +1193,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + email: me@testuser.org (string, required)
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes
 
@@ -1209,7 +1206,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + username: testuser (string, required)
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes
 
@@ -1228,13 +1225,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Headers
 
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
-+ Response 404 (application/json)
++ Response 404 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Record Not Found Response)
 
@@ -1244,7 +1241,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + id (number) - Id of a user.
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
     + Attributes
         + data
@@ -1262,27 +1259,27 @@ This resource identifies a relationship between a User and a Skill. For example,
     + Headers
 
             Authorization: Bearer {token}
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 403 (application/json)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Forbidden Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
 ### Update me [PATCH /users/me]
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
     + Attributes
         + data
@@ -1300,17 +1297,17 @@ This resource identifies a relationship between a User and a Skill. For example,
     + Headers
 
             Authorization: Bearer {token}
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 
-+ Response 422 (application/json)
++ Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
 
@@ -1318,18 +1315,18 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ### Show authenticated user [GET]
 
-+ Request (application/json)
++ Request (application/vnd.api+json; charset=utf-8)
 
     + Headers
 
             Authorization: Bearer {token}
-            Accept: application/json
+            Accept: application/vnd.api+json
 
-+ Response 200 (application/json)
++ Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
-+ Response 401 (application/json)
++ Response 401 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (JSON Web Token Invalid Response)
 

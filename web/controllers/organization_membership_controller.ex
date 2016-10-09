@@ -6,7 +6,7 @@ defmodule CodeCorps.OrganizationMembershipController do
 
   alias CodeCorps.OrganizationMembership
 
-  import CodeCorps.FilterHelpers, only: [id_filter: 2, organization_filter: 2, role_filter: 2]
+  import CodeCorps.Helpers.Query, only: [id_filter: 2, organization_filter: 2, role_filter: 2]
 
   plug :load_resource, model: OrganizationMembership, only: [:show], preload: [:organization, :member]
   plug :load_and_authorize_resource, model: OrganizationMembership, only: [:delete]

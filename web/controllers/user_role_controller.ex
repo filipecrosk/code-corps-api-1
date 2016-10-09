@@ -4,7 +4,7 @@ defmodule CodeCorps.UserRoleController do
   use CodeCorps.Web, :controller
   use JaResource
 
-  import CodeCorps.FilterHelpers, only: [id_filter: 2]
+  import CodeCorps.Helpers.Query, only: [id_filter: 2]
 
   alias CodeCorps.UserRole
 

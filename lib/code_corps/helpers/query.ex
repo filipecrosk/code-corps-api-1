@@ -1,7 +1,6 @@
-defmodule CodeCorps.FilterHelpers do
-  use CodeCorps.Web, :model
-
-  import CodeCorps.StringHelpers, only: [coalesce_id_string: 1, coalesce_string: 1]
+defmodule CodeCorps.Helpers.Query do
+  import CodeCorps.Helpers.String, only: [coalesce_id_string: 1, coalesce_string: 1]
+  import Ecto.Query, only: [where: 3]
 
   def id_filter(query, id_list) do
     ids = id_list |> coalesce_id_string

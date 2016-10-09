@@ -4,7 +4,7 @@ defmodule CodeCorps.OrganizationController do
 
   alias CodeCorps.Organization
 
-  import CodeCorps.FilterHelpers, only: [id_filter: 2]
+  import CodeCorps.Helpers.Query, only: [id_filter: 2]
 
   plug :load_and_authorize_resource, model: Organization, only: [:create, :update]
   plug JaResource

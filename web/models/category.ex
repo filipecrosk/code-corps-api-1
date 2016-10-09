@@ -5,7 +5,7 @@ defmodule CodeCorps.Category do
 
   use CodeCorps.Web, :model
 
-  import CodeCorps.ModelHelpers
+  import CodeCorps.Helpers.Slug
 
   schema "categories" do
     field :name, :string

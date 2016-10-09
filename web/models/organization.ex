@@ -9,7 +9,7 @@ defmodule CodeCorps.Organization do
   alias CodeCorps.SluggedRoute
 
   import CodeCorps.Base64ImageUploader
-  import CodeCorps.ModelHelpers
+  import CodeCorps.Helpers.Slug
   import CodeCorps.Validators.SlugValidator
 
   schema "organizations" do

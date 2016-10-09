@@ -9,7 +9,7 @@ defmodule CodeCorps.Project do
   alias CodeCorps.MarkdownRenderer
 
   import CodeCorps.Base64ImageUploader
-  import CodeCorps.ModelHelpers
+  import CodeCorps.Helpers.Slug
   import CodeCorps.Validators.SlugValidator
 
   schema "projects" do

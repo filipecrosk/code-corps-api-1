@@ -144,6 +144,47 @@ Exchange email and password for `token`.
 
 # Group Comments
 
+## Task Comments [/tasks/{task_id}/comments]
+
+### List all of a task's comments [GET]
+
++ Parameters
+
+    + task_id (number) - Id of a task.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Comments Response)
+
+## Task Comment [/tasks/{task_id}/tasks/{id}]
+
+### Retrieve a task's comment [GET]
+
++ Parameters
+
+    + task_id (number) - Id of a task.
+    + id (number) - The `id` of a comment.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Comment Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
+
 ## Comments [/comments]
 
 ### Filter comments by list of ids [GET /comments{?filter[id]}]
@@ -1051,6 +1092,47 @@ This endpoint will return one of two possible responses, depending on if the slu
     + Attributes (Slugged Route Organization Response)
 
 # Group Tasks
+
+## Project Tasks [/projects/{project_id}/tasks]
+
+### List all of a project's tasks [GET]
+
++ Parameters
+
+    + project_id (number) - Id of a project.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Tasks Response)
+
+## Project Task [/projects/{project_id}/tasks/{number}]
+
+### Retrieve a project's task [GET]
+
++ Parameters
+
+    + project_id (number) - Id of a project.
+    + number (number) - The `number` of a task.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Task Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
 
 ## Tasks [/tasks]
 

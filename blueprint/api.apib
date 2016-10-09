@@ -130,7 +130,6 @@ Exchange email and password for `token`.
             Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-
 + Response 204 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (No Content Response)
@@ -156,7 +155,6 @@ Exchange email and password for `token`.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -173,7 +171,6 @@ Exchange email and password for `token`.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -239,7 +236,6 @@ Exchange email and password for `token`.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -268,14 +264,17 @@ Exchange email and password for `token`.
 
     + Attributes (Forbidden Response)
 
-### List all organization memberships for an organization [GET /organizations/:id/memberships]
+### List all organization memberships for an organization [GET /organizations/{organization_id}/memberships]
+
++ Parameters
+
+    + organization_id: 1 (number, required) - Organization id, uniquely identifying a organization
 
 + Request
 
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -290,7 +289,6 @@ Exchange email and password for `token`.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -525,8 +523,6 @@ Write privileges are for admin users only, read can be accessable by any user.
 
     + Attributes (Forbidden Response)
 
-# Group Project Roles
-
 # Group Projects
 
 ## Projects [/projects]
@@ -538,7 +534,6 @@ Write privileges are for admin users only, read can be accessable by any user.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -551,7 +546,6 @@ Write privileges are for admin users only, read can be accessable by any user.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -564,7 +558,6 @@ Write privileges are for admin users only, read can be accessable by any user.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -577,7 +570,6 @@ Write privileges are for admin users only, read can be accessable by any user.
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -801,7 +793,6 @@ This endpoint will return one of two possible responses, depending on if the slu
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -839,7 +830,6 @@ This endpoint will return one of two possible responses, depending on if the slu
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -858,7 +848,6 @@ This endpoint will return one of two possible responses, depending on if the slu
     + Headers
 
             Accept: application/vnd.api+json
-            Authorization: Bearer {token}
 
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
@@ -923,6 +912,11 @@ When creating a user category, the authenticated user is assumed by the server s
 
 + Request
 
+    + Headers
+
+            Accept: application/vnd.api+json
+            Authorization: Bearer {token}
+
     + Attributes
 
       + data (object)
@@ -931,13 +925,6 @@ When creating a user category, the authenticated user is assumed by the server s
                   + data (object)
                       + type: `category` (string, required)
                       + id: `1` (number, required)
-
-                  + Request
-
-                      + Headers
-
-                              Accept: application/vnd.api+json
-                              Authorization: Bearer {token}
 
 + Response 201 (application/vnd.api+json; charset=utf-8)
 
@@ -1276,59 +1263,6 @@ This resource identifies a relationship between a User and a Skill. For example,
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
-
-### Update me [PATCH /users/me]
-
-+ Request (application/vnd.api+json; charset=utf-8)
-
-    + Attributes
-        + data
-            + Include (User Resource Identifier)
-            + attributes (object)
-                + first_name: `Test` (string, optional)
-                + last_name: `User` (string, optional)
-                + website: `https://testuser.org` (string, optional)
-                + biography: `Sample bio.` (string, optional)
-                + twitter: `testuser` (string, optional)
-                + base64_photo_data: `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7` (string, optional)
-                + `state_transition`: `signed_up` (string, optional)
-                + theme: `light` (string, optional)
-
-    + Headers
-
-            Authorization: Bearer {token}
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (User Response)
-
-+ Response 401 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (JSON Web Token Invalid Response)
-
-+ Response 422 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Unprocessable Entity Response)
-
-## User [/user]
-
-### Show authenticated user [GET]
-
-+ Request (application/vnd.api+json; charset=utf-8)
-
-    + Headers
-
-            Authorization: Bearer {token}
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (User Response)
-
-+ Response 401 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (JSON Web Token Invalid Response)
 
 # Data Structures
 

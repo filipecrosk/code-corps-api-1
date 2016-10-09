@@ -1072,11 +1072,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Skills [/user-skills]
 
-### Filter user skills by id [GET /user-skills{?filter}]
+### Filter user skills by id [GET /user-skills{?filter[id]}]
 
 + Parameters
 
-    + filter: (Id Filter)
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -1161,11 +1163,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Users [/users]
 
-### Filter users by id [GET /users?filter[id]={ids}]
+### Filter users by id [GET /users{}?filter[id]}]
 
 + Parameters
 
-    + `filter[id]`: `1,2` (required, string)
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request (application/vnd.api+json; charset=utf-8)
 

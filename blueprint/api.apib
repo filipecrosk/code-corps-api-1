@@ -573,6 +573,92 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
     + Attributes (Forbidden Response)
 
+# Group Project Skills
+
+## Project Skills [/project-skills]
+
+### Create a project skill [POST]
+
++ Request
+
+    + Attributes (Project Skill Create Request)
+
+    + Headers
+
+            Accept: application/vnd.api+json
+            Authorization: Bearer {token}
+
++ Response 201 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Skill Response)
+
++ Response 401 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (JSON Web Token Invalid Response)
+
++ Response 422 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Unprocessable Entity Response)
+
+### List all project skills [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Skills Response)
+
+## Project Skill [/project-skills/{id}]
+
+### Retrieve a project skill [GET]
+
++ Parameters
+
+    + id (number) - Id of a project skill.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Skill Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
+
+### Delete a project skill [DELETE]
+
++ Parameters
+
+    + id (number) - Id of a project skill.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+            Authorization: Bearer {token}
+
++ Response 204 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (No Content Response)
+
++ Response 401 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (JSON Web Token Invalid Response)
+
++ Response 403 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Forbidden Response)
+
 # Group Projects
 
 ## Organization Projects [/{slug}/projects]
@@ -1682,9 +1768,28 @@ This resource identifies a relationship between a User and a Skill. For example,
 + data(array[Project Category Resource])
 + include JSON API Version
 
+## Project Skill Resource (object)
++ include Project Skill Resource Identifier
++ relationships
+    + project
+        + data(Project Resource Identifier)
+    + skill
+        + data(Skill Resource Identifier)
+
 ## Project Skill Resource Identifier (object)
 + id: 1 (string)
 + type: `project-skill` (string, required)
+
+## Project Skill Create Request (object)
++ data(Project Skill Resource)
+
+## Project Skill Response (object)
++ data(Project Skill Resource)
++ include JSON API Version
+
+## Project Skills Response (object)
++ data(array[Project Skill Resource])
++ include JSON API Version
 
 ## Record Not Found Response (object)
 + errors (array)

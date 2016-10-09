@@ -348,13 +348,15 @@ This endpoint retrieves organzations that are signed up with Code Corp looking f
 
 Write privileges are for admin users only, read can be accessable by any user.
 
-## Organizations [/organizations{?filter}]
+## Organizations [/organizations{?filter[id]}]
 
 ### Filter organizations by id [GET]
 
 + Parameters
 
-    + filter: `1` (enum[number], required) - Array of Ids query to filter organizations
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -1435,18 +1437,20 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Organization Resource (object)
 + include Organization Resource Identifier
 + attributes
+    + description: `Build a better future.`
+    + `icon-large-url`: `https://random_string.cloundfront.net/organizations/1/large.png`
+    + `icon-thumb-url`: `https://random_string.cloundfront.net/organizations/1/thumb.png`
+    + `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
     + name: `Code Corps`
     + slug: `code_corps`
-    + description: `Build a better future.`
-    + icon_thumb_url: `https://random_string.cloundfront.net/organizations/1/thumb.png`
-    + icon_large_url: `https://random_string.cloundfront.net/organizations/1/large.png`
+    + `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 + relationships
-    + members
-        + data(array[Member Resource Identifier])
-    + projects
-        + data(array[Project Resource Identifier])
     + organization-memberships
         + data(array[Organization Membership Resource Identifier])
+    + projects
+        + data(array[Project Resource Identifier])
+    + slugged-route
+        + data(Slugged Route Resource Identifier)
 
 ## Organization Membership Resource (object)
 + include Organization Membership Resource Identifier
@@ -1672,7 +1676,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Slugged Route Resource Identifier (object)
 + id: `1` (string)
-+ type: `slugged_route` (string)
++ type: `slugged-route` (string)
 
 ## Slugged Route User Response (object)
 + data(Slugged Route User Resource)

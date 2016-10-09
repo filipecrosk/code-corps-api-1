@@ -539,33 +539,9 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
 # Group Projects
 
-## Projects [/projects]
+## Organization Projects [/{slug}/projects]
 
-### List all projects [GET]
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Projects Response)
-
-### Retrieve a project [GET /projects/:id]
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Project Response)
-
-### Retrieve all projects for organization specified by slug [GET /{slug}/projects]
+### Retrieve all projects for organization specified by slug [GET]
 
 + Parameters
 
@@ -580,6 +556,8 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 + Response 200 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Projects Response)
+
+## Organization Project [/{slug}/{project_slug}]
 
 ### Retrieve a project by slug [GET /{slug}/{project_slug}]
 
@@ -598,6 +576,20 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
     + Attributes (Project Response)
 
+## Projects [/projects]
+
+### List all projects [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Projects Response)
+
 ### Create a project [POST]
 
 + Request
@@ -614,6 +606,18 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
     + Attributes (Project Response)
 
 ## Project [/projects/{id}]
+
+### Retrieve a project [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Project Response)
 
 ### Update a project [PATCH]
 
@@ -813,7 +817,7 @@ Slugged routes allow us to make API requests for a user or an organization witho
 
 ## Slugged Routes [/:slug]
 
-### Find a Slugged Route [GET]
+### Retrieve a slugged route [GET]
 
 This endpoint will return one of two possible responses, depending on if the slugged route's owner is a user or an organization. If the slugged route is owned by a user, the responses's owner relationship will have a user relationship and a nil organization relationship. If it's owned by an organization, it will have an organization relationship and a nil user relationship.
 
@@ -1035,7 +1039,7 @@ This resource identifies a relationship between a User and a Role. For example, 
 
     + Attributes (Unprocessable Entity Response)
 
-## User Roles [/user-roles/{id}]
+## User Role [/user-roles/{id}]
 
 ### Delete a user role [DELETE]
 

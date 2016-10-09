@@ -452,11 +452,15 @@ Write privileges are for admin users only, read can be accessable by any user.
 
 # Group Previews
 
+Preview resources allow a user to create a temporary HTML preview for any kind of markdown.
+
 ## Preview [/previews]
 
 ### Create a preview [POST]
 
 + Request
+
+    + Attributes (Preview Create Request)
 
     + Headers
 
@@ -1276,7 +1280,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Categories Relationship (object)
 + data
   + id: 1 (string)
-  + type: `category` (string)
+  + type: `category` (string, required)
 
 ## Categories Relationships (object)
 + categories
@@ -1286,7 +1290,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 + include Project Category Resource Identifier
 
 ## Category Resource Identifier
-+ id: `1` (string)
++ id: `1` (string, required)
 + type: `category`
 
 ## Category Resource (object)
@@ -1324,11 +1328,11 @@ This resource identifies a relationship between a User and a Skill. For example,
 + `updated-at`: `2014-07-07T18:01:26.000Z` (string)
 
 ## Comment Resource Identifier (object)
-+ id: `1` (string)
-+ type: `comment` (string)
++ id: `1` (string, required)
++ type: `comment` (string, required)
 
 ## Comment Create Request (object)
-+ type: `comment` (string)
++ type: `comment` (string, required)
 + attributes
     + markdown: `Markdown formatted string` (string)
 + relationships
@@ -1352,7 +1356,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Comment Relationship (object)
 + id: 1 (string)
-+ type: `comment` (string)
++ type: `comment` (string, required)
 
 ## Filter Missing Response (object)
 + errors (array)
@@ -1375,8 +1379,8 @@ This resource identifies a relationship between a User and a Skill. For example,
     + id: `1,2,3,...` (string, required) - A list of ids, in a single string, comma-separated
 
 ## Github Repository Resource Identifier
-+ id: `1` (string)
-+ type: `github-repository` (string)
++ id: `1` (string, required)
++ type: `github-repository` (string, required)
 
 ## No Content Response (object)
 
@@ -1423,8 +1427,8 @@ This resource identifies a relationship between a User and a Skill. For example,
 + user_id: 1 (number, required)
 
 ## Organization Resource Identifier
-+ id: `1` (string)
-+ type: `organization` (string)
++ id: `1` (string, required)
++ type: `organization` (string, required)
 
 ## Organization Response (object)
 + data(Organization Resource)
@@ -1470,8 +1474,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + `owner`
 
 ## Organization Membership Resource Identifier (object)
-+ id: `1` (string)
-+ type: `organization-membership` (string)
++ id: `1` (string, required)
++ type: `organization-membership` (string, required)
 
 ## Organization Membership Response (object)
 + data(Organization Membership Resource)
@@ -1482,7 +1486,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 + include JSON API Version
 
 ## Organization Membership Create Request (object)
-+ type: `organization-membership` (string)
++ type: `organization-membership` (string, required)
 + attributes(Organization Membership Attributes)
 + relationships
     + members
@@ -1494,23 +1498,37 @@ This resource identifies a relationship between a User and a Skill. For example,
 + include Organization Membership Resource Identifier
 + attributes(Organization Membership Attributes)
 
-## Preview (object)
+## Preview Attributes (object)
 + body: `<p>A <strong>strong</strong> preview</p>` (string)
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
 + markdown: `A *strong* preview` (string)
++ `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 
-## Preview Response Base (object)
-+ id: `1` (string)
-+ type: `preview` (string)
-+ attributes(Preview, required)
-+ relationships(Preview Relationships Base, required)
+## Preview Create Attributes (object)
++ markdown: `A *strong* preview` (string, required)
+
+## Preview Create Request (object)
++ include Preview Resource Identifier
++ attributes(Preview Create Attributes)
+
+## Preview Resource (object)
++ include Preview Resource Identifier
++ attributes(Preview Attributes)
++ relationships
+    + user
+        + data(User Resource Identifier)
+
+## Preview Resource Identifier (object)
++ id: `1` (string, required)
++ type: `preview` (string, required)
 
 ## Preview Response (object)
-+ data(Preview Response Base)
++ data(Preview Resource)
 + include JSON API Version
 
 ## Previews Relationship (object)
 + id: 1 (string)
-+ type: `preview` (string)
++ type: `preview` (string, required)
 
 ## Preview Relationships Base (object)
 + include User Resource Identifier
@@ -1525,7 +1543,7 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## Project Category Resource Identifier (object)
 + id: 1 (string)
-+ type: `project-category` (string)
++ type: `project-category` (string, required)
 
 ## Project Category Create Request (object)
 + data(Project Category Resource)
@@ -1548,8 +1566,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + data(Organization Resource Identifier)
 
 ## Project Resource Identifier (object)
-+ id: `1` (string)
-+ type: `project` (string)
++ id: `1` (string, required)
++ type: `project` (string, required)
 
 ## Project Attributes (object)
 + slug: 'code_corps' (string) - Case insensitive unique string identifier for the project
@@ -1560,11 +1578,13 @@ This resource identifies a relationship between a User and a Skill. For example,
 + long_description_body: 'Example <b>html</b>' (string) - A html string containing the rendered long_description_markdown
 + long_description_markdown: 'Example **markdown**' (string) - Markdown formatted string containing the project long description
 
-## Projects Response
-+ data(array[Project Resource])
-
-## Project Response
+## Project Response (object)
 + data(Project Resource)
++ include JSON API Version
+
+## Projects Response (object)
++ data(array[Project Resource])
++ include JSON API Version
 
 ## Project Create Request
 + data
@@ -1595,8 +1615,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + status: 404 (number) - HTTP status code
 
 ## Role Resource Identifier
-+ id: `1` (string)
-+ type: `role` (string)
++ id: `1` (string, required)
++ type: `role` (string, required)
 
 ## Role Response (object)
 + data(Role Resource)
@@ -1632,12 +1652,12 @@ This resource identifies a relationship between a User and a Skill. For example,
         + data(array[Skill Resource Identifier])
 
 ## Role Skill Resource Identifier (object)
-+ id: `1` (string)
-+ type: `role-skill` (string)
++ id: `1` (string, required)
++ type: `role-skill` (string, required)
 
 ## Skill Resource Identifier (object)
-+ id: `1` (string)
-+ type: `skill` (string)
++ id: `1` (string, required)
++ type: `skill` (string, required)
 
 ## Skill Resource (object)
 + include Skill Resource Identifier
@@ -1675,8 +1695,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + data(Organization Resource Identifier)
 
 ## Slugged Route Resource Identifier (object)
-+ id: `1` (string)
-+ type: `slugged-route` (string)
++ id: `1` (string, required)
++ type: `slugged-route` (string, required)
 
 ## Slugged Route User Response (object)
 + data(Slugged Route User Resource)
@@ -1698,8 +1718,8 @@ This resource identifies a relationship between a User and a Skill. For example,
 + `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 
 ## Task Resource Identifier
-+ id: `1` (string)
-+ type: `task` (string)
++ id: `1` (string, required)
++ type: `task` (string, required)
 
 ## Task Resource (object)
 + include Task Resource Identifier
@@ -1755,8 +1775,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + data(User Resource Identifier)
 
 ## User Category Resource Identifier
-+ id: `1` (string)
-+ type: `user-category` (string)
++ id: `1` (string, required)
++ type: `user-category` (string, required)
 
 ## User Category Response (object)
 + data(User Category Resource)
@@ -1792,20 +1812,20 @@ This resource identifies a relationship between a User and a Skill. For example,
 + relationships(User Relationships)
 
 ## User Resource Identifier (object)
-+ id: `1` (string)
-+ type: `user` (string)
++ id: `1` (string, required)
++ type: `user` (string, required)
 
 ## User Relationship (object)
 + id: 1 (string)
-+ type: `user` (string)
++ type: `user` (string, required)
 
 ## User Roles Relationship (object)
 + id: 1 (string)
-+ type: `user-role` (string)
++ type: `user-role` (string, required)
 
 ## User Role Resource Identifier
-+ id: `1` (string)
-+ type: `user-role` (string)
++ id: `1` (string, required)
++ type: `user-role` (string, required)
 
 ## User Role Response (object)
 + data(User Role Resource)
@@ -1824,8 +1844,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + data(User Resource Identifier)
 
 ## User Skill Resource Identifier (object)
-+ id: `1` (string)
-+ type: `user-skill` (string)
++ id: `1` (string, required)
++ type: `user-skill` (string, required)
 
 ## User Skill Response (object)
 + data(User Skill Resource)

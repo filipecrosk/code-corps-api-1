@@ -130,9 +130,13 @@ Exchange email and password for `token`.
             Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 204 (application/vnd.api+json; charset=utf-8)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
-    + Attributes (No Content Response)
+    + Attributes (Category Response)
+
++ Response 403 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Forbidden Response)
 
 + Response 404 (application/vnd.api+json; charset=utf-8)
 
@@ -215,6 +219,10 @@ Exchange email and password for `token`.
 + Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Comment Response)
+
++ Response 403 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Forbidden Response)
 
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
@@ -434,7 +442,7 @@ Write privileges are for admin users only, read can be accessable by any user.
             Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/vnd.api+json; charset=utf-8)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Organization Response)
 
@@ -557,7 +565,11 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
     + Attributes (Project Response)
 
-### Retrieve all projects for organization specified by slug [GET /:slug/projects]
+### Retrieve all projects for organization specified by slug [GET /{slug}/projects]
+
++ Parameters
+
+    + `slug`: `code-corps` (string, required) - Slug of the organization.
 
 + Request
 
@@ -569,7 +581,12 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
     + Attributes (Projects Response)
 
-### Retrieve a project by slug [GET /:slug/:project-slug]
+### Retrieve a project by slug [GET /{slug}/{project_slug}]
+
++ Parameters
+
+    + `slug`: `code-corps` (string, required) - Slug of the organization.
+    + `project_slug`: `code-corps` (string, required) - Slug of the project.
 
 + Request
 
@@ -609,9 +626,13 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
             Accept: application/vnd.api+json
             Authorization: Bearer {token}
 
-+ Response 200 (application/vnd.api+json; charset=utf-8)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
+
++ Response 403 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Forbidden Response)
 
 # Group Roles
 
@@ -880,9 +901,9 @@ This endpoint will return one of two possible responses, depending on if the slu
 
     + Attributes (Task Response)
 
-+ Response 204 (application/vnd.api+json; charset=utf-8)
++ Response 403 (application/vnd.api+json; charset=utf-8)
 
-    + Attributes (No Content Response)
+    + Attributes (Forbidden Response)
 
 + Response 404 (application/vnd.api+json; charset=utf-8)
 
@@ -1254,7 +1275,7 @@ This resource identifies a relationship between a User and a Skill. For example,
             Authorization: Bearer {token}
             Accept: application/vnd.api+json
 
-+ Response 200 (application/vnd.api+json; charset=utf-8)
++ Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (User Response)
 
@@ -1533,50 +1554,33 @@ This resource identifies a relationship between a User and a Skill. For example,
 ## Preview Relationships Base (object)
 + include User Resource Identifier
 
-## Project Category Resource (object)
-+ include Project Category Resource Identifier
-+ relationships
-    + category
-        + data(Category Resource Identifier)
-    + project
-        + data(Project Resource Identifier)
-
-## Project Category Resource Identifier (object)
-+ id: 1 (string)
-+ type: `project-category` (string, required)
-
-## Project Category Create Request (object)
-+ data(Project Category Resource)
-
-## Project Category Response (object)
-+ data(Project Category Resource)
-+ include JSON API Version
+## Project Attributes (object)
++ description: 'Help build and fund public software projects for social good.' (string) - A short plain text description for the project
++ `icon-large-url`: 'example.com/icon_large.png' (string) - A url pointing to a large icon for the project
++ `icon-thumb-url`: 'example.com/icon_thumb.png' (string) - A url pointing to the project thumbnail
++ `inserted-at`: `2016-07-08T03:03:51.967Z` (string)
++ `long-description-body`: 'Example <b>html</b>' (string) - A html string containing the rendered `long-description-markdown`
++ `long-description-markdown`: 'Example **markdown**' (string) - Markdown formatted string containing the project long description
++ slug: 'code-corps' (string) - Case insensitive unique string identifier for the project
++ title: 'Code Corps' (string) - A title for the project
++ `updated-at`: `2016-07-08T03:03:51.967Z` (string)
 
 ## Project Resource (object)
 + include Project Resource Identifier
 + attributes(Project Attributes)
 + relationships
-    + categories
-        + data(array[Category Resource Identifier])
-    + roles
-        + data(array[Role Resource Identifier])
-    + skills
-        + data(array[Skill Resource Identifier])
-    + organizations
+    + organization
         + data(Organization Resource Identifier)
+    + `project-categories`
+        + data(array[Project Category Resource Identifier])
+    + `project-skills`
+        + data(array[Project Skill Resource Identifier])
+    + tasks
+        + data(array[Task Resource Identifier])
 
 ## Project Resource Identifier (object)
 + id: `1` (string, required)
 + type: `project` (string, required)
-
-## Project Attributes (object)
-+ slug: 'code_corps' (string) - Case insensitive unique string identifier for the project
-+ title: 'Code Corps' (string) - A title for the project
-+ description: 'Help build and fund public software projects for social good.' (string) - A short plain text description for the project
-+ icon_thumb_url: 'example.com/icon_thumb.png' (string) - A url pointing to the project thumbnail
-+ icon_large_url: 'example.com/icon_large.png' (string) - A url pointing to a large icon for the project
-+ long_description_body: 'Example <b>html</b>' (string) - A html string containing the rendered long_description_markdown
-+ long_description_markdown: 'Example **markdown**' (string) - Markdown formatted string containing the project long description
 
 ## Project Response (object)
 + data(Project Resource)
@@ -1606,6 +1610,29 @@ This resource identifies a relationship between a User and a Skill. For example,
         + description (string) - A short plain text description for the project
         + slug (string) - Case insensitive unique string identifier for the project
         + long_description_markdown (string) - Markdown formatted string containing the project long description
+
+## Project Category Resource (object)
++ include Project Category Resource Identifier
++ relationships
+    + category
+        + data(Category Resource Identifier)
+    + project
+        + data(Project Resource Identifier)
+
+## Project Category Resource Identifier (object)
++ id: 1 (string)
++ type: `project-category` (string, required)
+
+## Project Category Create Request (object)
++ data(Project Category Resource)
+
+## Project Category Response (object)
++ data(Project Category Resource)
++ include JSON API Version
+
+## Project Skill Resource Identifier (object)
++ id: 1 (string)
++ type: `project-skill` (string, required)
 
 ## Record Not Found Response (object)
 + errors (array)

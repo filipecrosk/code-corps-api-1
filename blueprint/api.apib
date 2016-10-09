@@ -805,6 +805,28 @@ A user is able to have multiple roles through their user roles.
 
   + Attributes (Roles Response)
 
+## Role [/roles/{id}]
+
+### Retrieve a role [GET]
+
++ Parameters
+
+    + id (number) - Id of a role.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Role Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
+
 # Group Role Skills
 
 This resource identifies a relationship between a Role and a Skill. For example, the skill of "JavaScript" may relate to the role of "Backend Developer," and also "Front End Developer" and even "Mobile Developer".
@@ -967,6 +989,18 @@ For example, if we wanted to return skills like "Java" and "JavaScript", we may 
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
+
+### List all skills [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Skills Response)
 
 ## Skill [/skills/{id}]
 
@@ -1449,6 +1483,18 @@ This resource identifies a relationship between a User and a Skill. For example,
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
+
+### List all users [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Users Response)
 
 ### Check email availability [GET /users/email_available?email={email}]
 

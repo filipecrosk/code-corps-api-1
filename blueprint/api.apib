@@ -15,7 +15,7 @@ The staging API can be found at `http://api.pbqrpbecf.org`.
 
 The remote development API can be found at `http://api.pbqrpbecf-qri.org`.
 
-# Authentication
+# Group Authentication
 
 When using the API's authenticated endpoints you can authenticate users by exchanging the `username` (email address) and `password` for a JSON Web Token.
 
@@ -71,6 +71,10 @@ Exchange email and password for `token`.
     + Attributes (JSON Web Token Expired Response)
 
 # Group Categories
+
+This endpoint is for creating and returning the categories available for projects and users.
+
+The Category resource allows us to categorize projects (Project Category), as well as identify a user's interests (User Category). The catgories of "Society", "Technology" or "Government", for example, could all be used to categorize projects or match to a user's given interests.
 
 ## Categories [/categories]
 
@@ -144,7 +148,11 @@ Exchange email and password for `token`.
 
 # Group Comments
 
+This endpoint is for creating and returning comments.
+
 ## Task Comments [/tasks/{task_id}/comments]
+
+You can list all comments or retrieve individual comments for a single task.
 
 ### List all of a task's comments [GET]
 
@@ -187,39 +195,7 @@ Exchange email and password for `token`.
 
 ## Comments [/comments]
 
-### Filter comments by list of ids [GET /comments{?filter[id]}]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Comments Response)
-
-## List comments for a specified task [GET /tasks/{task_id}/comments]
-
-+ Parameters
-
-    + task_id: 1 (number, required) - Task id, uniquely identifying a task
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Comments Response)
+You can list all comments or retrieve individual comments, as well as create and update comments.
 
 ### Create a comment [POST]
 
@@ -239,6 +215,40 @@ Exchange email and password for `token`.
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
+
+## List comments for a specified task [GET /tasks/{task_id}/comments]
+
++ Parameters
+
+    + task_id: 1 (number, required) - Task id, uniquely identifying a task
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Comments Response)
+
+### Filter comments by list of ids [GET /comments{?filter[id]}]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Comments Response)
 
 ## Comment [/comments/{id}]
 
@@ -273,23 +283,6 @@ Exchange email and password for `token`.
 
 ## Organization Memberships [/organization-memberships]
 
-### Filter organization memberships by id [GET]
-
-+ Parameters
-
-    + filter
-        + id: `1,2,...` (string, required) - Comma separated string of `ids` to filter by.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Organization Memberships Response)
-
 ### Create an organization membership [POST]
 
 + Request
@@ -318,6 +311,23 @@ Exchange email and password for `token`.
 + Parameters
 
     + organization_id: 1 (number, required) - Organization id, uniquely identifying a organization
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Organization Memberships Response)
+
+### Filter organization memberships by id [GET]
+
++ Parameters
+
+    + filter
+        + id: `1,2,...` (string, required) - Comma separated string of `ids` to filter by.
 
 + Request
 
@@ -393,33 +403,11 @@ Exchange email and password for `token`.
 
 # Group Organizations
 
-This endpoint retrieves organzations that are signed up with Code Corp looking for contributors.
+This endpoint retrieves Organizations on Code Corps. Organizations usually have one or more Projects.
 
-Write privileges are for admin users only, read can be accessable by any user.
+Until the Code Corps platform is open to new organizations, only admin users can create new organizations.
 
 ## Organizations [/organizations{?filter[id]}]
-
-### Filter organizations by id [GET]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Organizations Response)
-
-+ Response 400 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Filter Missing Response)
 
 ### Create an organization [POST]
 
@@ -445,6 +433,28 @@ Write privileges are for admin users only, read can be accessable by any user.
 + Response 422 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Unprocessable Entity Response)
+
+### Filter organizations by id [GET]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Organizations Response)
+
++ Response 400 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Filter Missing Response)
 
 ## Organization [/organizations/{id}]
 
@@ -529,6 +539,8 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
     + Attributes (Unprocessable Entity Response)
 
 # Group Project Categories
+
+This resource identifies a relationship between a Project and a Category. For example, the category of "Society" may belong to a given project.
 
 ## Project Categories [/project-categories]
 
@@ -615,6 +627,8 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
     + Attributes (Forbidden Response)
 
 # Group Project Skills
+
+This resource identifies a relationship between a Project and a Skill. For example, the project "Code Corps" may have the skills "Elixir" and "Phoenix".
 
 ## Project Skills [/project-skills]
 
@@ -741,18 +755,6 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 
 ## Projects [/projects]
 
-### List all projects [GET]
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Projects Response)
-
 ### Create a project [POST]
 
 + Request
@@ -767,6 +769,18 @@ Preview resources allow a user to create a temporary HTML preview for any kind o
 + Response 201 (application/vnd.api+json; charset=utf-8)
 
     + Attributes (Project Response)
+
+### List all projects [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Projects Response)
 
 ## Project [/projects/{id}]
 
@@ -962,49 +976,9 @@ We can use the many skills grouped under a role to suggest popular skills to use
 
 # Group Skills
 
-This endpoint retrieves skills that can be applied to both users (through user-skills) and roles (through role-skills)
+This endpoint retrieves Skills that can belong to Projects, Roles, or Users. This helps to match users to relevant projects or roles.
 
 ## Skills [/skills]
-
-Skills can be filtered by the id of the skill. This should be an array of one or multiple ids.
-
-### Filter by id [GET /skills{?filter[id]}]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Skills Response)
-
-### Autocomplete skill with query [GET /skills{?query}]
-
-Skills can be queried by a substring of the name of the skill. This should be a string with one or more letters of the name of the skill requested.
-
-For example, if we wanted to return skills like "Java" and "JavaScript", we may query with the substring "jav". A good use for this API would be a skill typeahed input.
-
-+ Parameters
-
-    + query: `jav` (string, optional) - Text query to filter returned skills
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Skills Response)
 
 ### Create a skill [POST]
 
@@ -1032,6 +1006,44 @@ For example, if we wanted to return skills like "Java" and "JavaScript", we may 
     + Attributes (Unprocessable Entity Response)
 
 ### List all skills [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Skills Response)
+
+### Filter by id [GET /skills{?filter[id]}]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Skills Response)
+
+### Autocomplete skill with query [GET /skills{?query}]
+
+Skills can be queried by a substring of the name of the skill. This should be a string with one or more letters of the name of the skill requested.
+
+For example, if we wanted to return skills like "Java" and "JavaScript", we may query with the substring "jav". A good use for this API would be a skill typeahead input.
+
++ Parameters
+
+    + query: `jav` (string, optional) - Text query to filter returned skills
 
 + Request
 
@@ -1095,6 +1107,8 @@ This endpoint will return one of two possible responses, depending on if the slu
 
 ## Project Tasks [/projects/{project_id}/tasks]
 
+You can list all tasks or retrieve individual tasks for a single project.
+
 ### List all of a project's tasks [GET]
 
 + Parameters
@@ -1114,6 +1128,10 @@ This endpoint will return one of two possible responses, depending on if the slu
 ## Project Task [/projects/{project_id}/tasks/{number}]
 
 ### Retrieve a project's task [GET]
+
+The `number` parameter in this endpoint is notably different from the usual `id`. Because the front-end Ember application loads a URL with the task's `number` (scoped to the project) for human readability, we don't actually know the `id`. The request is made with the `number` instead.
+
+This allows us to have a logical numbering scheme for the project rather than extremely long `id`s.
 
 + Parameters
 
@@ -1216,31 +1234,11 @@ This endpoint will return one of two possible responses, depending on if the slu
 
 This resource identifies a relationship between a User and a Category. For example, the category of "Society" may belong to a given user.
 
-It may help to think of a User Category as an interest. A user may have interests in "Society", "Technology" and "Government". We use those interests to match users up to relevant organizations and projects. The term "category" is more appropriate for _categorizing_ those organizations and projects.
+It may help to think of a User Category as an interest. A user may have interests in "Society", "Technology" and "Government". We use those interests to match users up to relevant projects. The term "category" is more appropriate for _categorizing_ those projects.
 
 ## User Categories [/user-categories]
 
-### Filter user categories by id [GET /user-categories{?filter[id]}}]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (User Categories Response)
-
 ### Create a user category [POST]
-
-When creating a user category, the authenticated user is assumed by the server so you should not supply the user's `id`. This will be ignored by your request and the server will default to the authenticated user making the request.
 
 + Request
 
@@ -1271,6 +1269,24 @@ When creating a user category, the authenticated user is assumed by the server s
     + Attributes (Unprocessable Entity Response)
 
 ### List all user categories [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (User Categories Response)
+
+### Filter user categories by id [GET /user-categories{?filter[id]}}]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -1417,24 +1433,6 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 ## User Skills [/user-skills]
 
-### Filter user skills by id [GET /user-skills{?filter[id]}]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request
-
-    + Headers
-
-            Accept: application/vnd.api+json
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (User Skills Response)
-
 ### Create a User Skill [POST /user-skills]
 
 + Request
@@ -1457,6 +1455,24 @@ This resource identifies a relationship between a User and a Skill. For example,
     + Attributes (Unprocessable Entity Response)
 
 ### List all user skills [GET]
+
++ Request
+
+    + Headers
+
+            Accept: application/vnd.api+json
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (User Skills Response)
+
+### Filter user skills by id [GET /user-skills{?filter[id]}]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
 
 + Request
 
@@ -1518,25 +1534,9 @@ This resource identifies a relationship between a User and a Skill. For example,
 
 # Group Users
 
+This endpoint handles the User resources for Code Corps.
+
 ## Users [/users]
-
-### Filter users by id [GET /users{}?filter[id]}]
-
-+ Parameters
-
-    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
-
-        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
-
-+ Request (application/vnd.api+json; charset=utf-8)
-
-+ Response 200 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Users Response)
-
-+ Response 404 (application/vnd.api+json; charset=utf-8)
-
-    + Attributes (Record Not Found Response)
 
 ### Create a user [POST]
 
@@ -1578,7 +1578,27 @@ This resource identifies a relationship between a User and a Skill. For example,
 
     + Attributes (Users Response)
 
+### Filter users by id [GET /users{}?filter[id]}]
+
++ Parameters
+
+    + `filter[id]`: `1,2,3` (string, required) - Comma separated string of `ids` to filter by.
+
+        Technically, the parameter is `filter: { id: '1,2,3' }`, which ends up being serialized into `filter[id]`. However, syntax constraints do not allow us to define it in the documentation this way.
+
++ Request (application/vnd.api+json; charset=utf-8)
+
++ Response 200 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Users Response)
+
++ Response 404 (application/vnd.api+json; charset=utf-8)
+
+    + Attributes (Record Not Found Response)
+
 ### Check email availability [GET /users/email_available?email={email}]
+
+This endpoint allows you to check whether an email is valid (by checking simply for presence of the `@` symbol) and whether the email is not already registered.
 
 + Parameters
 
@@ -1592,6 +1612,8 @@ This resource identifies a relationship between a User and a Skill. For example,
         + valid: `true` (boolean)
 
 ### Check username availability [GET /users/username_available?username={username}]
+
+This endpoint allows you to check whether a username is valid (by running a validation against formatting and reserved routes) and whether the username is not already registered.
 
 + Parameters
 
